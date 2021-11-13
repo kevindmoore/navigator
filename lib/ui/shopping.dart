@@ -17,8 +17,7 @@ class Shopping extends StatelessWidget {
             title: Text(items[index]),
             onTap: () {
               final value = items[index];
-              context.goNamed(detailsRouteName,
-                  params: {'tab': 'shop', 'item': value});
+              context.goNamed(detailsRouteName, params: {'item': value});
             },
           );
         },

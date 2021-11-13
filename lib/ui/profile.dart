@@ -43,7 +43,7 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                context.goNamed(personalRouteName, params: {'tab': 'profile'});
+                context.goNamed(personalRouteName);
               },
             ),
           ),
@@ -59,7 +59,7 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                context.goNamed(paymentRouteName, params: {'tab': 'profile'});
+                context.goNamed(paymentRouteName);
               },
             ),
           ),
@@ -76,7 +76,7 @@ class _ProfileState extends State<Profile> {
               ),
               onTap: () {
                 context
-                    .goNamed(signinInfoRouteName, params: {'tab': 'profile'});
+                    .goNamed(signinInfoRouteName);
               },
             ),
           ),
@@ -92,7 +92,7 @@ class _ProfileState extends State<Profile> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () {
-            context.goNamed(moreInfoRouteName, params: {'tab': 'profile'});
+            context.goNamed(moreInfoRouteName);
           },
         ),
       ),

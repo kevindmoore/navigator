@@ -56,7 +56,7 @@ class MyRouter {
         },
         routes: [
           GoRoute(
-            name: detailsRouteName,
+            name: shopDetailsRouteName,
             path: 'details/:item',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -64,7 +64,7 @@ class MyRouter {
             ),
           ),
           GoRoute(
-            name: personalRouteName,
+            name: profilePersonalRouteName,
             path: 'personal',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -72,7 +72,7 @@ class MyRouter {
             ),
           ),
           GoRoute(
-            name: paymentRouteName,
+            name: profilePaymentRouteName,
             path: 'payment',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -80,7 +80,7 @@ class MyRouter {
             ),
           ),
           GoRoute(
-            name: signinInfoRouteName,
+            name: profileSigninInfoRouteName,
             path: 'signin-info',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -88,7 +88,7 @@ class MyRouter {
             ),
           ),
           GoRoute(
-            name: moreInfoRouteName,
+            name: profileMoreInfoRouteName,
             path: 'more-info',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -96,6 +96,47 @@ class MyRouter {
             ),
           ),
         ],
+      ),
+      // forwarding routes to remove the need to put the 'tab' param in the code
+      GoRoute(
+        name: detailsRouteName,
+        path: '/shop-details/:item',
+        redirect: (state) => state.namedLocation(
+          shopDetailsRouteName,
+          params: {'tab': 'shop', 'item': state.params['item']!},
+        ),
+      ),
+      GoRoute(
+        name: personalRouteName,
+        path: '/profile-personal',
+        redirect: (state) => state.namedLocation(
+          profilePersonalRouteName,
+          params: {'tab': 'profile'},
+        ),
+      ),
+      GoRoute(
+        name: paymentRouteName,
+        path: '/profile-payment',
+        redirect: (state) => state.namedLocation(
+          profilePaymentRouteName,
+          params: {'tab': 'profile'},
+        ),
+      ),
+      GoRoute(
+        name: signinInfoRouteName,
+        path: '/profile-signin-info',
+        redirect: (state) => state.namedLocation(
+          profileSigninInfoRouteName,
+          params: {'tab': 'profile'},
+        ),
+      ),
+      GoRoute(
+        name: moreInfoRouteName,
+        path: '/profile-more-info',
+        redirect: (state) => state.namedLocation(
+          profileMoreInfoRouteName,
+          params: {'tab': 'profile'},
+        ),
       ),
     ],
 
