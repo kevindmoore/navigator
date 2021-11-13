@@ -13,12 +13,6 @@ class _MoreInfoState extends State<MoreInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         backgroundColor: Colors.lightBlue,
         title: const Text(
           'More Info',

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../cart_holder.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../cart_holder.dart';
+import '../constants.dart';
 
 class Details extends StatelessWidget {
   final String description;
@@ -13,12 +16,6 @@ class Details extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.lightBlue,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: const Text(
           'Details',
           style: TextStyle(
@@ -47,7 +44,7 @@ class Details extends StatelessWidget {
               onPressed: () {
                 Provider.of<CartHolder>(context, listen: false)
                     .addItem(description);
-                Navigator.of(context).pop();
+                context.goNamed(homeRouteName);
               },
               child: const Text(
                 'Add To Cart',

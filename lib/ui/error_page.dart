@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 //ignore: must_be_immutable
 class ErrorPage extends StatelessWidget {
@@ -15,6 +15,6 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(message);
+    return Scaffold(body: Center(child: Text(message)));
   }
 }

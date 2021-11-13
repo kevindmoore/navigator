@@ -43,7 +43,7 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                context.pushNamed(personalPage);
+                context.goNamed(personalRouteName);
               },
             ),
           ),
@@ -59,7 +59,7 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                context.pushNamed(paymentPage);
+                context.goNamed(paymentRouteName);
               },
             ),
           ),
@@ -75,7 +75,8 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                context.pushNamed(signinInfoPage);
+                context
+                    .goNamed(signinInfoRouteName);
               },
             ),
           ),
@@ -91,7 +92,7 @@ class _ProfileState extends State<Profile> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () {
-            context.pushNamed(moreInfoPage);
+            context.goNamed(moreInfoRouteName);
           },
         ),
       ),
