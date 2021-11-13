@@ -44,7 +44,7 @@ class Details extends StatelessWidget {
               onPressed: () {
                 Provider.of<CartHolder>(context, listen: false)
                     .addItem(description);
-                context.goNamed(mainRouteName);
+                context.goNamed(homeRouteName);
               },
               child: const Text(
                 'Add To Cart',

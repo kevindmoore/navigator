@@ -82,7 +82,7 @@ class _SigninInfoState extends State<SigninInfo> {
                   ),
                 ),
               ),
-              onPressed: () {}, // TODO: Navigator.pop(context),
+              onPressed: () => Navigator.pop(context),
               child: const Text(
                 'Change Password',
                 style: TextStyle(color: Colors.white),
@@ -118,6 +118,5 @@ class _SigninInfoState extends State<SigninInfo> {
 
   void saveLoginState(BuildContext context) {
     Provider.of<LoginState>(context, listen: false).loggedIn = false;
-    // TODO: Navigator.pop(context);
   }
 }

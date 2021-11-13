@@ -4,26 +4,41 @@ import 'profile.dart';
 import 'shopping.dart';
 
 class MainScreen extends StatefulWidget {
-  final String index;
-  const MainScreen({required this.index, Key? key}) : super(key: key);
+  final int index;
+  MainScreen({required String tab, Key? key})
+      : index = indexFrom(tab),
+        super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
+
+  static int indexFrom(String tab) {
+    switch (tab) {
+      case 'cart':
+        return 1;
+      case 'profile':
+        return 2;
+      case 'shopping':
+      default:
+        return 0;
+    }
+  }
 }
 
 class _MainScreenState extends State<MainScreen> {
   late int _selectedIndex;
-  List<Widget> pageList = <Widget>[];
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = int.parse(widget.index);
-    pageList.add(const Shopping());
-    pageList.add(const Cart());
-    pageList.add(const Profile());
+    _selectedIndex = widget.index;
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _selectedIndex = widget.index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: pageList,
+        children: const [Shopping(), Cart(), Profile()],
       ),
     );
   }
