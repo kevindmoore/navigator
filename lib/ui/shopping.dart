@@ -9,15 +9,15 @@ class Shopping extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = List<String>.generate(10000, (i) => 'Item $i');
-    return SafeArea(
-      child: ListView.builder(
+    return Scaffold(
+      body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(items[index]),
             onTap: () {
               final value = items[index];
-              context.pushNamed(detailsPage, params: {item: value});
+              context.goNamed(detailsPageName, params: {item: value});
             },
           );
         },

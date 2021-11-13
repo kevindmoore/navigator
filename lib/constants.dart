@@ -1,13 +1,13 @@
 const String loggedInKey = 'LoggedIn';
-const String loginPage = 'login';
-const String createAccountPage = 'create_account';
+const String loginRouteName = 'login';
+const String createAccountRouteName = 'create_account';
 const String personalPage = 'personal';
 const String paymentPage = 'payment';
 const String signinInfoPage = 'signin';
 const String moreInfoPage = 'moreInfo';
 const String profilePage = 'profile';
-const String mainPage = 'main';
+const String mainRouteName = 'main';
 const String cartPage = 'cart';
 const String shoppingPage = 'shopping';
-const String detailsPage = 'details';
+const String detailsPageName = 'details';
 const String item = 'item';

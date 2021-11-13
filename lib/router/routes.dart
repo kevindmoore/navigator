@@ -15,19 +15,15 @@ import '../login_state.dart';
 import '../ui/login.dart';
 import '../ui/details.dart';
 
-const String loginRoute = '/login';
-const String createAccountRoute = '/create_account';
-const String homeRoute = '/';
-const String mainPageRoute = '/main/:index';
-const String personalPageRoute = 'personal';
-const String paymentPageRoute = 'payment';
-const String signinInfoPageRoute = 'signin';
-const String moreInfoPageRoute = 'moreInfo';
-const String profilePageRoute = 'profile';
-const String cartPageRoute = 'cart';
-const String shoppingPageRoute = 'shopping';
-const String detailsPageRouteName = 'details';
-const String detailsPageRoute = '/details/:item';
+const String homeRouteName = 'home';
+const String personalRouteName = 'personal';
+const String paymentRouteName = 'payment';
+const String signinRouteName = 'signin';
+const String moreInfoRouteName = 'moreInfo';
+const String profileRouteName = 'profile';
+const String cartRouteName = 'cart';
+const String shoppingRouteName = 'shopping';
+const String detailsRouteName = 'details';
 
 class MyRouter {
   final LoginState loginState;
@@ -35,111 +31,116 @@ class MyRouter {
   MyRouter(this.loginState);
 
   late final router = GoRouter(
-    initialLocation: homeRoute,
     refreshListenable: loginState,
     debugLogDiagnostics: true,
     urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
-        name: loginPage,
-        path: loginRoute,
+        name: loginRouteName,
+        path: '/login',
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child: const Login(),
         ),
       ),
       GoRoute(
-        name: createAccountPage,
-        path: createAccountRoute,
+        name: createAccountRouteName,
+        path: '/create-account',
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child: const CreateAccount(),
         ),
       ),
       GoRoute(
-        path: homeRoute,
-        redirect: (_) => '/main/0',
+        name: homeRouteName,
+        path: '/',
+        redirect: (state) =>
+            state.namedLocation(mainRouteName, params: {'index': '0'}),
       ),
       GoRoute(
-          name: mainPage,
-          path: mainPageRoute,
-          pageBuilder: (context, state) {
-            final index = state.params['index']!;
-            return MaterialPage<void>(
+        name: mainRouteName,
+        path: '/main/:tab(shop|cart|profile)',
+        pageBuilder: (context, state) {
+          final index = state.queryParams['index'] ?? '0';
+          return MaterialPage<void>(
+            key: state.pageKey,
+            child: MainScreen(index: index),
+          );
+        },
+        routes: [
+          GoRoute(
+            name: shoppingRouteName,
+            path: 'shopping',
+            pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
-              child: MainScreen(index: index),
-            );
-          },
-          routes: [
-            GoRoute(
-              name: shoppingPage,
-              path: shoppingPageRoute,
-              pageBuilder: (context, state) => MaterialPage<void>(
-                key: state.pageKey,
-                child: const Shopping(),
-              ),
+              child: const Shopping(),
             ),
-            GoRoute(
-              name: cartPage,
-              path: cartPageRoute,
-              pageBuilder: (context, state) => MaterialPage<void>(
-                key: state.pageKey,
-                child: const Cart(),
-              ),
-            ),
-            GoRoute(
-                name: profilePage,
-                path: profilePageRoute,
+            routes: [
+              GoRoute(
+                name: detailsPageName,
+                path: ':item',
                 pageBuilder: (context, state) => MaterialPage<void>(
-                      key: state.pageKey,
-                      child: const Profile(),
-                    ),
-                routes: [
-                  GoRoute(
-                    name: personalPage,
-                    path: personalPageRoute,
-                    pageBuilder: (context, state) => MaterialPage<void>(
-                      key: state.pageKey,
-                      child: const PersonalInfo(),
-                    ),
+                  key: state.pageKey,
+                  child: Builder(
+                    builder: (context) {
+                      return Details(description: state.params[item]!);
+                    },
                   ),
-                  GoRoute(
-                    name: paymentPage,
-                    path: paymentPageRoute,
-                    pageBuilder: (context, state) => MaterialPage<void>(
-                      key: state.pageKey,
-                      child: const Payment(),
-                    ),
-                  ),
-                  GoRoute(
-                    name: signinInfoPage,
-                    path: signinInfoPageRoute,
-                    pageBuilder: (context, state) => MaterialPage<void>(
-                      key: state.pageKey,
-                      child: const SigninInfo(),
-                    ),
-                  ),
-                  GoRoute(
-                    name: moreInfoPage,
-                    path: moreInfoPageRoute,
-                    pageBuilder: (context, state) => MaterialPage<void>(
-                      key: state.pageKey,
-                      child: const MoreInfo(),
-                    ),
-                  ),
-                ]),
-          ]),
-      GoRoute(
-        name: detailsPage,
-        path: detailsPageRoute,
-        pageBuilder: (context, state) => MaterialPage<void>(
-          key: state.pageKey,
-          child: Builder(
-            builder: (context) {
-              return Details(description: state.params[item]!);
-            },
+                ),
+              ),
+            ],
           ),
-        ),
+          GoRoute(
+            name: cartRouteName,
+            path: 'cart',
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const Cart(),
+            ),
+          ),
+          GoRoute(
+            name: profileRouteName,
+            path: 'profile',
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const Profile(),
+            ),
+            routes: [
+              GoRoute(
+                name: personalRouteName,
+                path: 'personal',
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  key: state.pageKey,
+                  child: const PersonalInfo(),
+                ),
+              ),
+              GoRoute(
+                name: paymentRouteName,
+                path: 'payment',
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  key: state.pageKey,
+                  child: const Payment(),
+                ),
+              ),
+              GoRoute(
+                name: signinRouteName,
+                path: 'signin',
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  key: state.pageKey,
+                  child: const SigninInfo(),
+                ),
+              ),
+              GoRoute(
+                name: moreInfoRouteName,
+                path: 'more-info',
+                pageBuilder: (context, state) => MaterialPage<void>(
+                  key: state.pageKey,
+                  child: const MoreInfo(),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
 
@@ -150,19 +151,15 @@ class MyRouter {
 
     // redirect to the login page if the user is not logged in
     redirect: (state) {
-      if ((state.location == loginRoute ||
-              state.location == createAccountRoute) &&
-          !loginState.loggedIn) {
-        return null;
-      }
-      if (!loginState.loggedIn) {
-        return loginRoute;
-      }
-      if ((state.location == loginRoute ||
-              state.location == createAccountRoute) &&
-          loginState.loggedIn) {
-        return homeRoute;
-      }
+      final loginLoc = state.namedLocation(loginRouteName);
+      final loggingIn = state.subloc == loginLoc;
+      final createAccountLoc = state.namedLocation(createAccountRouteName);
+      final creatingAccount = state.subloc == createAccountLoc;
+      final loggedIn = loginState.loggedIn;
+      final homeLoc = state.namedLocation(mainRouteName);
+
+      if (!loggedIn && !loggingIn && !creatingAccount) return loginLoc;
+      if (loggedIn && (loggingIn || creatingAccount)) return homeLoc;
       return null;
     },
   );

@@ -19,12 +19,6 @@ class _SigninInfoState extends State<SigninInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         backgroundColor: Colors.lightBlue,
         title: const Text(
           'Signin Info',
@@ -88,7 +82,7 @@ class _SigninInfoState extends State<SigninInfo> {
                   ),
                 ),
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {}, // TODO: Navigator.pop(context),
               child: const Text(
                 'Change Password',
                 style: TextStyle(color: Colors.white),
@@ -124,6 +118,6 @@ class _SigninInfoState extends State<SigninInfo> {
 
   void saveLoginState(BuildContext context) {
     Provider.of<LoginState>(context, listen: false).loggedIn = false;
-    Navigator.pop(context);
+    // TODO: Navigator.pop(context);
   }
 }

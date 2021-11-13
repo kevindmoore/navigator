@@ -112,7 +112,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                         ),
                         onPressed: () {
-                          context.go(loginPage);
+                          context.go(loginRouteName);
                         },
                         child: const Text('Cancel'),
                       ),
