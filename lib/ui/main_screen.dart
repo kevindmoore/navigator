@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'cart.dart';
 import 'profile.dart';
 import 'shopping.dart';
@@ -65,6 +66,17 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
+            switch (index) {
+              case 0:
+                context.go('/main/shop');
+                break;
+              case 1:
+                context.go('/main/cart');
+                break;
+              case 2:
+                context.go('/main/profile');
+                break;
+            }
           });
         },
       ),

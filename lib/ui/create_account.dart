@@ -132,6 +132,5 @@ class _CreateAccountState extends State<CreateAccount> {
 
   void saveLoginState(BuildContext context) {
     Provider.of<LoginState>(context, listen: false).loggedIn = true;
-    // GoRouter.of(context).refresh();
   }
 }
