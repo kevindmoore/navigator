@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../ui/create_account.dart';
 import '../ui/error_page.dart';
-import '../ui/main_screen.dart';
+import '../ui/home_screen.dart';
 import '../ui/more_info.dart';
 import '../ui/payment.dart';
 import '../ui/personal_info.dart';
@@ -23,11 +23,28 @@ class MyRouter {
     urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
-        name: homeRouteName,
+        name: 'root',
         path: '/',
         redirect: (state) =>
-            state.namedLocation(mainRouteName, params: {'tab': 'shop'}),
+            state.namedLocation(homeRouteName, params: {'tab': 'shop'}),
       ),
+/*
+      GoRoute(
+        path: '/shop',
+        redirect: (state) =>
+            state.namedLocation(homeRouteName, params: {'tab': 'shop'}),
+      ),
+      GoRoute(
+        path: '/cart',
+        redirect: (state) =>
+            state.namedLocation(homeRouteName, params: {'tab': 'cart'}),
+      ),
+      GoRoute(
+        path: '/profile',
+        redirect: (state) =>
+            state.namedLocation(homeRouteName, params: {'tab': 'profile'}),
+      ),
+*/
       GoRoute(
         name: loginRouteName,
         path: '/login',
@@ -45,18 +62,20 @@ class MyRouter {
         ),
       ),
       GoRoute(
-        name: mainRouteName,
-        path: '/main/:tab(shop|cart|profile)',
+        name: homeRouteName,
+        path: '/home/:tab',
+        // path: '/home/:tab(shop|cart|profile)',
         pageBuilder: (context, state) {
+          print('Tab: ${state.params['tab']}');
           final tab = state.params['tab']!;
           return MaterialPage<void>(
             key: state.pageKey,
-            child: MainScreen(tab: tab),
+            child: HomeScreen(tab: tab),
           );
         },
         routes: [
           GoRoute(
-            name: shopDetailsRouteName,
+            name: subDetailsRouteName,
             path: 'details/:item',
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
@@ -100,9 +119,9 @@ class MyRouter {
       // forwarding routes to remove the need to put the 'tab' param in the code
       GoRoute(
         name: detailsRouteName,
-        path: '/shop-details/:item',
+        path: '/details-redirector/:item',
         redirect: (state) => state.namedLocation(
-          shopDetailsRouteName,
+          subDetailsRouteName,
           params: {'tab': 'shop', 'item': state.params['item']!},
         ),
       ),

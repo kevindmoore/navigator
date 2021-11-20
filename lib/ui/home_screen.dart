@@ -4,14 +4,14 @@ import 'cart.dart';
 import 'profile.dart';
 import 'shopping.dart';
 
-class MainScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final int index;
-  MainScreen({required String tab, Key? key})
+  HomeScreen({required String tab, Key? key})
       : index = indexFrom(tab),
         super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 
   static int indexFrom(String tab) {
     switch (tab) {
@@ -26,7 +26,7 @@ class MainScreen extends StatefulWidget {
   }
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late int _selectedIndex;
 
   @override
@@ -66,18 +66,21 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
-            switch (index) {
+ /*           switch (index) {
               case 0:
-                context.go('/main/shop');
+                context.go('/shop');
+                // context.go('/root/shop');
                 break;
               case 1:
-                context.go('/main/cart');
+                context.go('/cart');
+                // context.go('/root/cart');
                 break;
               case 2:
-                context.go('/main/profile');
+                context.go('/profile');
+                // context.go('/root/profile');
                 break;
             }
-          });
+*/          });
         },
       ),
       body: IndexedStack(
