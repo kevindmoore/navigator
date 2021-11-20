@@ -23,7 +23,6 @@ class MyRouter {
     urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
-        name: 'root',
         path: '/',
         redirect: (state) =>
             state.namedLocation(homeRouteName, params: {'tab': 'shop'}),
@@ -63,10 +62,9 @@ class MyRouter {
       ),
       GoRoute(
         name: homeRouteName,
-        path: '/home/:tab',
-        // path: '/home/:tab(shop|cart|profile)',
+        // path: '/home/:tab',
+        path: '/home/:tab(shop|cart|profile)',
         pageBuilder: (context, state) {
-          print('Tab: ${state.params['tab']}');
           final tab = state.params['tab']!;
           return MaterialPage<void>(
             key: state.pageKey,
